@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Crowdfunding</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="./app.js"></script>
+</head>
+<body>
+  <div class="container-fluid">
+    <h1>Crowdfunding Dapp</h1>
+    <h3 style="margin-top: 0px; margin-botton: 30px;">Crowdfunding campaign for sample project</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <table class="table table-fluid">
+          <tr>
+            <th>Crowdfunding Goal</th>
+            <td>
+              <span class="black">
+                <span id="cf_goal"></span>&nbsp;ETH
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <th>Total Funds Raised</th>
+            <td>
+              <span class="black">
+                <span id="cf_balance"></span>&nbsp;ETH
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <th>Total Backers</th>
+            <td>
+              <span class="black">
+                <span id="cf_backers"></span>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <th>Deadline</th>
+            <td>
+              <span class="black">
+                <span id="cf_days"></span>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <th>Campaign Status</th>
+            <td>
+              <span class="black">
+                <span id="cf_status"></span>
+              </span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <h2 style="padding-top: 20px;">Contribute to Campaign</h2>
+        <h3 style="margin-top: 0px; margin-bottom: 30px;">Pay to crowd funding contract</h3>
+        <span class="black">
+          Coinbase Address: <span id="cb_address" class="c_address"></span>
+        </span>
+        <br>
+        <span class="black">
+          Coinbase Balance: <span id="cb_balance"></span>&nbsp;ETH
+        </span>
+        <br><br>
+        <input style="height: 38px;" type="text" class="form-control" id="amount" placeholder="Amount in ETH"/><br>
+        <button class="btn btn-primary btn-lg" onclick="App.contribute();">SEND</button>
+        <button class="btn btn-primary btn-lg" onclick="App.checkGoalReached();">CHECK GOAL</button>
+        <br><br>
+        <div id="status"></div>
+      </div>
+      <div class="col-md-4">
+        <center>
+          <h3>Send Ether to</h3>
+          <span class="black">
+            <span id="cf_address"></span>
+          </span><br>
+          <div id="qr_code"></div>
+        </center>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>
