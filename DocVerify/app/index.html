@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Document Verification</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="./app.js"></script>
+</head>
+<body>
+  <div class="container-fluid">
+    <h1>Document Verification</h1>
+    <h3 style="margin-top: 0px; margin-bottom: 30px;"></h3>
+    <div class="row">
+      <div class="col-md-8">
+        <table class="table table-fluid">
+          <tr>
+            <th>Contract Address</th>
+            <td><span class="black">
+              <span id="cf_address"></span>
+            </span></td>
+          </tr>
+          <tr>
+            <th>Documents Submitted</th>
+            <td><span class="black">
+              <span id="cf_documents"></span>
+            </span></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h2 style="padding-top: 20px;">Add/Verify Documents</h2>
+        <h3 style="margin-top: 0px; margin-bottom: 30px;">Calculate document hash and submit to blockchain or verify existing document</h3>
+        <span class="black">
+          Coinbase Address:&nbsp;<span id="cb_address" class="c_address"></span>
+        </span><br>
+        <span class="black">
+          Coinbase Balance:&nbsp;<span id="cb_balance"></span>&nbsp;ETH
+        </span><br><br>
+
+        <input class="form-control" type="file" name="fileUpload" id="fileUpload" /><br>
+        <button class="btn btn-primary btn-lg" onclick="App.calculateHash();">Calculate Hash</button>
+        <br><br>
+        <span class="black">Hash: <span id="docHash"></span></span><br>
+        <button class="btn btn-primary btn-lg" onclick="App.submitDocument();">Submit Document</button>
+        <button class="btn btn-primary btn-lg" onclick="App.verifyDocument();">Verify Document</button>
+        <br><br>
+        <div id="status"></div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>
