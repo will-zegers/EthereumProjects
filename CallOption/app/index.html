@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Call Option</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="./app.js"></script>
+
+</head>
+<body>
+  <div class="container-fluid">
+    <h1>Call Options Dapp</h1>
+    <h3 style="margin-top: 0px; margin-bottom: 30px;"></h3>
+
+    <div id="tabs">
+      <ul>
+        <li><a href="#tabs-1">Seller: Initialize Call</a></li>
+        <li><a href="#tabs-2">Buyer: Validate Call</a></li>
+        <li><a href="#tabs-3">Buyer: Exercise Call</a></li>
+      </ul>
+      <div id="tabs-1">
+        <div class="row">
+          <div class="col-md-8">
+            <h2 style="padding-top: 20px;">Initialize Call Option</h2>
+            <h3 style="margin-top: 0px; margin-bottom: 30px;">Seller intializes the call option</h3>
+
+            <input type="text" class="form-control" id="buyer" placeholder="Buyer"/><br>
+            <input type="text" class="form-control" id="strikePrice" placeholder="Strike Price (ETH)"/><br>
+            <input type="text" class="form-control" id="underlyingName" placeholder="Underlying Name"/><br>
+            <input type="text" class="form-control" id="underlyingQty" placeholder="Underlying Units"/><br>
+            <input type="text" class="form-control" id="premium" placeholder="Premium (ETH)"/><br>
+            <input type="text" class="form-control" id="timeToExpiry" placeholder="Time To Expiry"/><br>
+            <button id="initializeBtn" class="btn btn-primary btn-lrg">INITIALIZE CALL OPTION</button><br><br>
+
+            <div id="status"></div>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+      </div>
+
+      <div id="tabs-2">
+        <div class="row">
+          <div class="col-md-8">
+            <h2 style="padding-top: 20px;">Validate Call Option</h2>
+            <h3 style="margin-top: 0px; margin-bottom: 30px;">Buyer validates the call option</h3>
+
+            <input style="height: 38px;" type="text" class="form-control" id="premiumAmount" placeholder="Pay premium amount (ETH)">
+            <button id="validateBtn" class="btn btn-primary btn-lg">VALIDATE CALL OPTION</button>
+
+            <div id="status1"></div>            
+          </div>
+        <div class="col-md-4"></div>
+        </div>
+      </div>
+
+      <div id="tabs-3">
+        <div class="row">
+          <div class="col-md-8">
+            <h2 style="padding-top: 20px;">Exercise Call Option</h2>
+            <h3 style="margin-top: 0px; margin-bottom: 30px;">Buyer exercises the call option</h3>
+
+            <input style="height: 38px;" type="text" class="form-control" id="callAmount" placeholder="Pay call amount (ETH)">
+            <button id="exerciseBtn" class="btn btn-primary btn-lg">EXERCISE CALL OPTION</button>
+
+            <div id="status2"></div>            
+          </div>
+        <div class="col-md-4"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <h2 style="padding-top: 20px;">Call Option Contract</h2>
+        <h3 style="margin-top: 0px; margin-bottom: 30px;"></h3>
+
+        <table class="table table-fluid">
+          <tr>
+            <th>Seller</th>
+            <td><span class="black">
+              <span id="cf_seller"></span>
+            </span></td>
+          </tr>
+          <tr>
+            <th>Buyer</th>
+            <td><span class="black">
+              <span id="cf_buyer"></span>
+            </span></td>
+          </tr>
+          <tr>
+            <th>Underlying</th>
+            <td><span class="black">
+              <span id="cf_underlyingName"></span>
+            </span></td>
+          </tr>
+          <tr>
+            <th>Underlying Units</th>
+            <td><span class="black">
+              <span id="cf_underlyingQty"></span>
+            </span></td>
+          </tr>
+          <tr>
+            <th>Strike Price</th>
+            <td><span class="black">
+              <span id="cf_strikePrice"></span>&nbsp;ETH
+            </span></td>
+          </tr>
+          <tr>
+            <th>Premium</th>
+            <td><span class="black">
+              <span id="cf_premium"></span>&nbsp;ETH
+            </span></td>
+          </tr>
+          <tr>
+            <th>Start Time</th>
+            <td><span class="black">
+              <span id="cf_startTime"></span>
+            </span></td>
+          </tr>
+          <tr>
+            <th>Time to Expiry</th>
+            <td><span class="black">
+              <span id="cf_timeToExpiry"></span>
+            </span></td>
+          </tr>
+          <tr>
+            <th>Is Active</th>
+            <td><span class="black">
+              <span id="cf_isActive"></span>
+            </span></td>
+          </tr>
+          <tr>
+            <th>Is Complete</th>
+            <td><span class="black">
+              <span id="cf_isComplete"></span>
+            </span></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-md-4">
+        <center>
+          <h3>Contract Address:&nbsp;</h3>
+          <span class="black"><span id="cf_address"></span></span><br>
+
+          <div id="qrcode"></div>
+        </center>
+      </div>
+    </div>
+  </div>
+  
+  
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js""></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</body>
+</html>
