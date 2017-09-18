@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Interest Rate Swap</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js""></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="./app.js"></script>
+
+</head>
+<body>
+  <div class="container-fluid">
+    <h1>Interest Rate Swap Dapp</h1>
+    <h3></h3>
+
+    <div id="tabs">
+      <ul>
+        <li><a href="#tabs-1">Party-A: Initialize Contract</a></li>
+        <li><a href="#tabs-2">Party-B: Validate Contract</a></li>
+        <li><a href="#tabs-3">Exercise</a></li>
+      </ul>
+      <div id="tabs-1">
+        <div class="row">
+          <div class="col-md-8">
+            <h2 style="padding-top: 20px;">Initialize Contract</h2>
+            <h3 style="margin-top: 0px; margin-botton: 30px;">Party-A initializes the contract</h3>
+            <span class="black">
+              <span id="cb_addressA"></span>
+            </span>
+            <br><br>
+            <input type="text" class="form-control" id="partyATradingAcct" placeholder="Party-A Trading Account">
+            <input type="text" class="form-control" id="partyBTradingAcct" placeholder="Party-B Trading Account">
+            <input type="text" class="form-control" id="fixedRate" placeholder="Fixed Rate (%)">
+            <input type="text" class="form-control" id="floatRateMargin" placeholder="Floating Rate Margin (%)">
+            <input type="text" class="form-control" id="notional" placeholder="Notional (ETH)">
+            <input type="text" class="form-control" id="schedule" placeholder="Schedule (in minutes)">
+            <input type="text" class="form-control" id="rateFeed" placeholder="Address of Rate Provider">
+            <input type="text" class="form-control" id="feedName" placeholder="Feed Name">
+            <input type="text" class="form-control" id="timeToExpiry" placeholder="Time to Expiry (in minutes)">
+
+            <button class="btn btn-primary btn-lrg" onclick="App.initializeContract();">INITIALIZE CONTRACT</button>
+            <br><br>
+            <div id="status"></div>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+      </div>
+
+      <div id="tabs-2">
+        <div class="row">
+          <div class="col-md-8">
+            <h2 style="padding-top: 0px;">Validate Contract</h2>
+            <h3 style="margin-top: 0px; margin-bottom: 30px;">Party-B validates the contract</h3>
+            <span class="black">
+              <span id="cb_addressB"></span>
+            </span>
+            <br><br>
+            <button class="btn btn-lrg btn-primary" onclick="App.validate();">VALIDATE CONTRACT</button>
+            <br><br>
+            <div id="status1"></div>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+      </div>
+
+      <div id="tabs-3">
+        <div class="row">
+          <div class="col-md-8">
+            <h2 style="padding-top: 0px;">Exercise</h2>
+            <h3 style="margin-top: 0px; margin-bottom: 30px;">Exercise the contract</h3>
+            <br><br>
+            <button class="btn btn-lrg btn-primary" onclick="App.exercise();">EXERCISE</button>
+            <br><br>
+            <div id="status2"></div>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h2 style="padding-top: 20px;">Interest Rate Swap Contract</h2>
+        <h3></h3>
+        <table class="table table-fluid">
+          <tr>
+            <th>Party-A</th>
+            <td><span class="black">
+              <span id="cf_partyA"></span>
+            </span></td>
+          </tr>
+          <tr>
+            <th>Party-B</th>
+            <td><span class="black">
+              <span id="cf_partyB"></span>
+            </span></td>
+          </tr>
+          <tr>
+            <th>Notional</th>
+            <td><span class="black">
+              <span id="cf_notional"></span>
+            </span></td>
+          </tr>
+          <tr>
+            <th>Fixed Rate</th>
+            <td><span class="black">
+              <span id="cf_fixedRate"></span>
+            </span></td>
+          </tr>
+          <tr>
+            <th>Floating Rate Margin</th>
+            <td><span class="black">
+              <span id="cf_floatingRateMarin"></span>
+            </span></td>
+          </tr>
+          <tr>
+            <th>Last Amount Paid</th>
+            <td><span class="black">
+              <span id="cf_lastAmountPaid"></span>
+            </span></td>
+          </tr>
+          <tr>
+            <th>Schedule</th>
+            <td><span class="black">
+              <span id="cf_schedule"></span>
+            </span></td>
+          </tr>
+          <tr>
+            <th>Start Time</th>
+            <td><span class="black">
+              <span id="cf_startTime"></span>
+            </span></td>
+          </tr>
+          <tr>
+            <th>Time to Expiry</th>
+            <td><span class="black">
+              <span id="cf_timeToExpiry"></span>
+            </span></td>
+          </tr>
+          <tr>
+            <th>Is Active</th>
+            <td><span class="black">
+              <span id="cf_isActive"></span>
+            </span></td>
+          </tr>
+          <tr>
+            <th>Is Expired</th>
+            <td><span class="black">
+              <span id="cf_isExpired"></span>
+            </span></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-md-4">
+        <center>
+          <h3>Contract Address</h3>
+          <span class="black"><span id="cf_address"></span></span>
+          <br>
+          <div id="qrcode"></div>
+        </center>
+      </div>
+    </div>    
+  </div>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
